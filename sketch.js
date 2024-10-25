@@ -14,12 +14,12 @@ function setup() {
   obstacles.push(new Obstacle());
 
   // スタートボタンの作成
-  startButton = createButton('ゲームスタート');
-  startButton.position(width / 2 - 35, height / 2 - 17); 
+  startButton = createButton("ゲームスタート");
+  startButton.position(width / 2 - 35, height / 2 - 17);
 
-  startButton.mousePressed(startGame); 
+  startButton.mousePressed(startGame);
 
-  restartButton = createButton('再チャレンジ');
+  restartButton = createButton("再チャレンジ");
   restartButton.position(width / 2 - 50, height / 2); // ボタンの位置
   restartButton.mousePressed(restartGame); // ボタンが押されたときの処理
   restartButton.hide(); // 初めは非表示にする
@@ -27,11 +27,11 @@ function setup() {
 
 function draw() {
   background(220);
-  
+
   // 地面を描画
   fill(100);
   rect(0, height - groundHeight, width, groundHeight);
-  
+
   if (gameStarted) {
     if (!gameOver) {
       // プレイヤーの更新と表示
@@ -64,7 +64,7 @@ function draw() {
       fill(255, 0, 0);
       textAlign(CENTER, CENTER);
       text("Game Over", width / 2, height / 2 - 40);
-      
+
       // やり直しボタンを表示
       restartButton.show();
     }
@@ -73,7 +73,11 @@ function draw() {
     textSize(32);
     fill(0);
     textAlign(CENTER, CENTER);
-    text("ゲームを始めるにはボタンを押してください", width / 2, height / 2 - 40);
+    text(
+      "ゲームを始めるにはボタンを押してください",
+      width / 2,
+      height / 2 - 40
+    );
   }
 }
 
@@ -92,7 +96,7 @@ function restartGame() {
 }
 
 function keyPressed() {
-  if (key === ' ' && player.onGround() && gameStarted && !gameOver) {
+  if (key === " " && player.onGround() && gameStarted && !gameOver) {
     player.jump();
   }
 }
