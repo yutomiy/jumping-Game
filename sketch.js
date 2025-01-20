@@ -10,28 +10,30 @@ let startButton; // スタートボタンの変数
 let restartButton; // やり直しボタンの変数
 let homeButton; // ホームボタンの変数
 
-function setup() {
+ function setup() {
   createCanvas(800, 400);
   player = new Player();
   obstacles = [];
 
   // スタートボタンの作成
   startButton = createButton("ゲームスタート");
-  startButton.position(width / 2 - 50, height / 2 - 20);
+  startButton.position(width / 2 - 75, height / 2 - 20); // 中央に配置
   startButton.mousePressed(startGame);
 
   // やり直しボタンの作成
   restartButton = createButton("再チャレンジ");
-  restartButton.position(width / 2 - 50, height / 2 - 60);
+  restartButton.position(width / 2 - 75, height / 2 - 60); // 中央に配置
   restartButton.mousePressed(restartGame);
   restartButton.hide(); // 初めは非表示にする
 
   // ホームボタンの作成
   homeButton = createButton("ホームに戻る");
-  homeButton.position(width / 2 - 50, height / 2 - 20);
+  homeButton.position(width / 2 - 75, height / 2 + 20); // 中央に配置
   homeButton.mousePressed(goToHome);
   homeButton.hide(); // 初めは非表示にする
 }
+
+
 
 function draw() {
   background(220);
