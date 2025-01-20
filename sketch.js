@@ -13,7 +13,7 @@ let homeButton; // ホームボタンの変数
 function setup() {
   createCanvas(800, 400);
   player = new Player();
-  obstacles.push(new Obstacle());
+  obstacles = [];
 
   // スタートボタンの作成
   startButton = createButton("ゲームスタート");
@@ -92,6 +92,7 @@ function startGame() {
   isHomeScreen = false; // ホーム画面を非表示
   obstacles = []; // 障害物リセット
   gameOver = false; // ゲームオーバー状態をリセット
+  player = new Player(); // プレイヤーを初期化
   startButton.hide(); // スタートボタンを非表示にする
   restartButton.hide(); // やり直しボタンを非表示
   homeButton.hide(); // ホームボタンを非表示
@@ -186,4 +187,3 @@ class Obstacle {
     rect(this.x, this.y, this.width, this.height);
   }
 }
-
