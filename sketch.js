@@ -17,19 +17,19 @@ function setup() {
 
   // スタートボタンの作成
   startButton = createButton("ゲームスタート");
-  startButton.position(width / 2 - 35, height / 2 - 17);
+  startButton.position(width / 2 - 50, height / 2 - 20);
   startButton.mousePressed(startGame);
 
   // やり直しボタンの作成
   restartButton = createButton("再チャレンジ");
-  restartButton.position(width / 2 - 50, height / 2); // ボタンの位置
-  restartButton.mousePressed(restartGame); // ボタンが押されたときの処理
+  restartButton.position(width / 2 - 50, height / 2 - 60);
+  restartButton.mousePressed(restartGame);
   restartButton.hide(); // 初めは非表示にする
 
   // ホームボタンの作成
   homeButton = createButton("ホームに戻る");
-  homeButton.position(width / 2 - 50, height / 2 + 50); // ボタンの位置
-  homeButton.mousePressed(goToHome); // ボタンが押されたときの処理
+  homeButton.position(width / 2 - 50, height / 2 - 20);
+  homeButton.mousePressed(goToHome);
   homeButton.hide(); // 初めは非表示にする
 }
 
@@ -41,7 +41,8 @@ function draw() {
     textSize(32);
     fill(0);
     textAlign(CENTER, CENTER);
-    text("ようこそ！ゲームを始めるにはボタンを押してください", width / 2, height / 2 - 40);
+    text("ようこそ！", width / 2, height / 2 - 80);
+    text("ゲームを始めるにはボタンを押してください", width / 2, height / 2 - 40);
   } else if (gameStarted) {
     // 地面を描画
     fill(100);
@@ -77,7 +78,7 @@ function draw() {
       textSize(50);
       fill(255, 0, 0);
       textAlign(CENTER, CENTER);
-      text("Game Over", width / 2, height / 2 - 40);
+      text("Game Over", width / 2, height / 2 - 120);
 
       // やり直しボタンとホームボタンを表示
       restartButton.show();
