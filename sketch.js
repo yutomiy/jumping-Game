@@ -5,8 +5,10 @@ let gravity = 1;
 let jumpForce = -15;
 let gameOver = false; // ゲームオーバーのフラグ
 let gameStarted = false; // ゲーム開始フラグ
+let isHomeScreen = true; // ホーム画面フラグ
 let startButton; // スタートボタンの変数
 let restartButton; // やり直しボタンの変数
+let homeButton; // ホームボタンの変数
 
 function setup() {
   createCanvas(800, 400);
@@ -16,23 +18,35 @@ function setup() {
   // スタートボタンの作成
   startButton = createButton("ゲームスタート");
   startButton.position(width / 2 - 35, height / 2 - 17);
-
   startButton.mousePressed(startGame);
 
+  // やり直しボタンの作成
   restartButton = createButton("再チャレンジ");
   restartButton.position(width / 2 - 50, height / 2); // ボタンの位置
   restartButton.mousePressed(restartGame); // ボタンが押されたときの処理
   restartButton.hide(); // 初めは非表示にする
+
+  // ホームボタンの作成
+  homeButton = createButton("ホームに戻る");
+  homeButton.position(width / 2 - 50, height / 2 + 50); // ボタンの位置
+  homeButton.mousePressed(goToHome); // ボタンが押されたときの処理
+  homeButton.hide(); // 初めは非表示にする
 }
 
 function draw() {
   background(220);
 
-  // 地面を描画
-  fill(100);
-  rect(0, height - groundHeight, width, groundHeight);
+  if (isHomeScreen) {
+    // ホーム画面の表示
+    textSize(32);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text("ようこそ！ゲームを始めるにはボタンを押してください", width / 2, height / 2 - 40);
+  } else if (gameStarted) {
+    // 地面を描画
+    fill(100);
+    rect(0, height - groundHeight, width, groundHeight);
 
-  if (gameStarted) {
     if (!gameOver) {
       // プレイヤーの更新と表示
       player.update();
@@ -65,27 +79,21 @@ function draw() {
       textAlign(CENTER, CENTER);
       text("Game Over", width / 2, height / 2 - 40);
 
-      // やり直しボタンを表示
+      // やり直しボタンとホームボタンを表示
       restartButton.show();
+      homeButton.show();
     }
-  } else {
-    // ゲームが開始されていないときのメッセージ
-    textSize(32);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(
-      "ゲームを始めるにはボタンを押してください",
-      width / 2,
-      height / 2 - 40
-    );
   }
 }
 
 function startGame() {
   gameStarted = true; // ゲームを開始
+  isHomeScreen = false; // ホーム画面を非表示
   obstacles = []; // 障害物リセット
   gameOver = false; // ゲームオーバー状態をリセット
   startButton.hide(); // スタートボタンを非表示にする
+  restartButton.hide(); // やり直しボタンを非表示
+  homeButton.hide(); // ホームボタンを非表示
 }
 
 function restartGame() {
@@ -93,6 +101,16 @@ function restartGame() {
   gameOver = false; // ゲームオーバー状態をリセット
   player = new Player(); // プレイヤーを初期化
   restartButton.hide(); // やり直しボタンを非表示
+  homeButton.hide(); // ホームボタンを非表示
+}
+
+function goToHome() {
+  isHomeScreen = true; // ホーム画面を表示
+  gameStarted = false; // ゲームを停止
+  gameOver = false; // ゲームオーバー状態をリセット
+  startButton.show(); // スタートボタンを表示
+  restartButton.hide(); // やり直しボタンを非表示
+  homeButton.hide(); // ホームボタンを非表示
 }
 
 function keyPressed() {
